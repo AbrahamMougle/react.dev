@@ -1,0 +1,254 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+h4 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+h5 {
+  margin-top: 0;
+  font-size: 14px;
+}
+
+h6 {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+code {
+  font-size: 1.2em;
+}
+
+ul {
+  padding-inline-start: 20px;
+}
+
+/* Conteneur principal pour aligner sur une seule ligne */
+.search-bar-form {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Espace entre le champ et le bouton */
+  width: 100%;
+  max-width: 600px; /* Largeur totale de votre bloc */
+  margin: 20px 0;
+}
+
+/* Groupe de l'input (prend tout l'espace disponible) */
+.form-group {
+  position: relative;
+  flex: 1; /* Force l'input à s'étirer */
+  height: 52px; /* Hauteur fixe identique au bouton */
+}
+
+.form-group input {
+  width: 100%;
+  height: 100%;
+  padding: 0 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px; /* Arrondi assorti au bouton */
+  outline: none;
+  background: transparent;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Style du label flottant */
+.form-group label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  padding: 0 4px;
+  color: #666;
+  transition: 0.2s ease all;
+  pointer-events: none;
+}
+
+/* Animations du label au focus ou si rempli */
+.form-group input:focus,
+.form-group input:not(:placeholder-shown) {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label {
+  top: 0;
+  font-size: 12px;
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Le Bouton Smooth */
+.btn-smooth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px; /* Même hauteur que l'input */
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap; /* Empêche le texte de sauter la ligne */
+  box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.2);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-smooth:hover:not(:disabled) {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+}
+
+.btn-smooth:hover:not(:disabled) .btn-icon {
+  transform: rotate(90deg);
+}
+
+.btn-smooth:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-icon {
+  transition: transform 0.3s ease;
+}
+
+/* Style lorsque le bouton est désactivé (champ vide) */
+.btn-smooth:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Ligne de la liste */
+.item-list-row {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.item-list-row:hover {
+  background-color: #f9fafb;
+  transform: translateX(2px); /* Léger glissement au survol */
+}
+
+/* Conteneur global du label cliquable */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Masquer la checkbox native de manière accessible */
+.checkbox-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Design de la fausse Checkbox personnalisée */
+.custom-checkbox {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  background-color: #ffffff;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Style de l'icône SVG de coche */
+.checkmark-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: scale(0); /* Masquée par défaut */
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- ÉTATS SÉLECTIONNÉS (Quand seen est true) --- */
+
+/* Changement de couleur de la checkbox */
+.checkbox-container input:checked ~ .custom-checkbox {
+  background-color: #10b981; /* Vert assorti à votre bouton Ajouter */
+  border-color: #10b981;
+}
+
+/* Affichage animé de la coche */
+.checkbox-container input:checked ~ .custom-checkbox .checkmark-icon {
+  transform: scale(1);
+}
+
+/* Style du texte du gadget */
+.item-title {
+  font-size: 16px;
+  color: #1f2937;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Effet de texte barré et grisé si l'objet est vu/coché */
+.item-list-row.is-seen .item-title {
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+/* Style optionnel : Légère opacité sur toute la ligne si validée */
+.item-list-row.is-seen {
+  background-color: #f3f4f6;
+}
+.list-vide {
+  color: #10b981;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
